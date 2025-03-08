@@ -1,0 +1,26 @@
+{
+  "templateName": "Default Template",
+  "version": "1.0",
+  "description": "This is the default template for the website builder.",
+  "settings": {
+    "colorScheme": "light",
+    "fontFamily": "Arial, sans-serif",
+    "layout": "responsive"
+  },
+  "components": {
+    "header": {
+      "enabled": true,
+      "title": "Welcome to My Website",
+      "logo": "assets/images/logo.png"
+    },
+    "footer": {
+      "enabled": true,
+      "text": "© 2023 My Website. All rights reserved."
+    }
+  },
+  "customizationOptions": {
+    "allowBackgroundChange": true,
+    "allowFontChange": true,
+    "allowLayoutChange": true
+  }
+}
