@@ -1,15 +1,18 @@
 // src/app.js
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 // CSS dosyalarını içe aktar
 import './assets/css/main.css';
 import './assets/css/templates.css';
 import './assets/css/pricing.css';
-import './assets/css/auth.css';  // Yeni eklenen 
-import './assets/css/dashboard.css';  // Yeni eklenen
-import './assets/css/contact.css';  // Yeni eklenen
+import './assets/css/auth.css';
+import './assets/css/dashboard.css';
+import './assets/css/contact.css';
+import './assets/css/features.css';
 
 // Layout ve sayfa bileşenlerini içe aktarın
 import Layout from './components/Layout';
@@ -23,6 +26,14 @@ import Register from './components/pages/Register';
 import Dashboard from './components/pages/Dashboard';
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Tüm uygulama için AOS'u bir kez başlat
+  AOS.init({
+    duration: 1000,
+    once: true,
+    offset: 120,
+    easing: 'ease-in-out'
+  });
+
   ReactDOM.render(
     <Router>
       <Routes>
