@@ -1,27 +1,41 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const apiRoutes = require('./routes/api');
-require('dotenv').config();
+const path = require('path');
+const dotenv = require('dotenv');
 
+// Routes
+const apiRoutes = require('./routes/api');
+const indexRoutes = require('./routes/index');
+
+// Environment variables
+dotenv.config();
+
+// Express app
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/website-builder')
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.error('MongoDB connection error:', err));
+// Statik dosyalar için
+app.use(express.static(path.join(__dirname, '../src')));
 
-// API Routes
+// MongoDB Bağlantısı
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log('MongoDB bağlantısı başarılı'))
+.catch(err => console.error('MongoDB bağlantı hatası:', err));
+
+// Routes
 app.use('/api', apiRoutes);
+app.use('/', indexRoutes);
 
-// Start the server
+// Server başlatma
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server ${PORT} portunda çalışıyor`);
 });

@@ -1,4 +1,4 @@
-const Template = require('../models/template');
+const Template = require('../models/mongodb/template');
 
 // Get all templates
 exports.getAllTemplates = async (req, res) => {
